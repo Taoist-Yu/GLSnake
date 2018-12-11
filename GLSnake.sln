@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLSnake", "GLSnake\GLSnake.vcxproj", "{D68E092E-1D5B-44DD-82CD-271F315EE27A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D68E092E-1D5B-44DD-82CD-271F315EE27A}.Debug|x64.ActiveCfg = Debug|x64
+		{D68E092E-1D5B-44DD-82CD-271F315EE27A}.Debug|x64.Build.0 = Debug|x64
+		{D68E092E-1D5B-44DD-82CD-271F315EE27A}.Debug|x86.ActiveCfg = Debug|Win32
+		{D68E092E-1D5B-44DD-82CD-271F315EE27A}.Debug|x86.Build.0 = Debug|Win32
+		{D68E092E-1D5B-44DD-82CD-271F315EE27A}.Release|x64.ActiveCfg = Release|x64
+		{D68E092E-1D5B-44DD-82CD-271F315EE27A}.Release|x64.Build.0 = Release|x64
+		{D68E092E-1D5B-44DD-82CD-271F315EE27A}.Release|x86.ActiveCfg = Release|Win32
+		{D68E092E-1D5B-44DD-82CD-271F315EE27A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6332CD99-9B9E-43B8-A2C1-A6BDDD9306B3}
+	EndGlobalSection
+EndGlobal
