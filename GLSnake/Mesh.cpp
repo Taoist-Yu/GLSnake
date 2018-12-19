@@ -2,42 +2,6 @@
 
 #include<iostream>
 
-Mesh::Mesh()
-{
-	this->vertices.push_back(
-		Vertex{
-			glm::vec3(-0.5, 0.5, 0),
-			glm::vec3(1, 1, 1)
-		}
-	);
-	this->vertices.push_back(
-		Vertex{
-			glm::vec3(0.5, 0.5, 0),
-			glm::vec3(1, 0, 0)
-		}
-	);
-	this->vertices.push_back(
-		Vertex{
-			glm::vec3(-0.5, -0.5, 0),
-			glm::vec3(0, 1, 0)
-		}
-	);
-	this->vertices.push_back(
-		Vertex{
-			glm::vec3(0.5, -0.5, 0),
-			glm::vec3(0, 0, 1)
-		}
-	);
-
-	int _indices[] = {
-		0,1,2,
-		1,2,3
-	};
-	this->indices = std::vector<GLuint>(_indices, _indices + 6);
-
-	SetupMesh();
-}
-
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures)
 {
 	this->vertices = vertices;

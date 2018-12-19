@@ -3,9 +3,11 @@
 #include<iostream>
 
 #include "Model.h"
-#include "carama.h"
+#include "Camera.h"
+#include "GameObject.h"
+#include "Scene.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow() 
 {
 	WindowInit(800, 600, "MainWindow");
 }
@@ -23,9 +25,15 @@ void MainWindow::MainLoop()
 {
 	glEnable(GL_DEPTH_TEST);
 	Shader shader("shader.vert", "shader.frag");
-	Model model1("model/nanosuit.obj");
-//	Model model1("Transparent eight prism.fbx");
-	Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+	Scene scene;
+	GameObject human(&scene, "model/nanosuit/nanosuit.obj", shader);
+	Camera camera(&scene,&human);
+
+	human.transform.Translate(0, 0, 10);
+
+	camera.transform.Translate(0,7,20);
+	camera.Update();
+	camera.Activate();
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -33,16 +41,7 @@ void MainWindow::MainLoop()
 		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), 800.f / 600.f, 0.1f, 100.0f);
-		glm::mat4 view = camera.GetViewMatrix();
-		shader.SetMat4("projection", projection);
-		shader.SetMat4("view", view);
-		glm::mat4 modelMat(1.0f);
-		modelMat = glm::translate(modelMat, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
-		modelMat = glm::scale(modelMat, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
-		shader.SetMat4("model", modelMat);
-
-		model1.Draw(shader);
+		scene.Update();
 
 		glfwPollEvents();
 	}

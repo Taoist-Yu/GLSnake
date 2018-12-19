@@ -4,6 +4,8 @@
 #include<stb_image.h>
 #include "Debug.h"
 
+std::vector<Mesh::Texture> Model::textures_loaded;
+
 Model::Model()
 {
 	meshes.push_back(new Mesh());

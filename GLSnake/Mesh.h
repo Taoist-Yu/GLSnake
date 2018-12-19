@@ -39,7 +39,7 @@ public:
 	std::vector<GLuint> indices;			//Ë÷Òı
 	std::vector<Texture> textures;			//²ÄÖÊ
 
-	Mesh();
+	Mesh() = default;
 	Mesh(const Mesh&) = default;
 	Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures);
 	~Mesh();

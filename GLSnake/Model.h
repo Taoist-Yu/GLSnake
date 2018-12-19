@@ -18,7 +18,7 @@
 class Model
 {
 private:
-	std::vector<Mesh::Texture> textures_loaded;
+	static std::vector<Mesh::Texture> textures_loaded;
 
 public:
 	/*  º¯Êý   */
