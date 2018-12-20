@@ -39,12 +39,29 @@ public:
 	void SetParent(GameObject *parent);
 	void DeleteChild(GameObject *child);
 
+	//Activity
+	void SetActive(bool active);
+	bool GetActive();
+	void EnableRendering();
+	void DisableRendring();
+
+	/*Lifecycle*/
+	//void PreEnable();		non-configurable
+	//is called before the first Update() after activate
+	virtual void OnEnable();
+	//is called once per framed 
 	virtual void Update();
-	
+	//is called before Renderer, you can do some extern configuration to your custom shader 
+	virtual void PreRender();
+	//void Renderer();		non-configurable
+	//is called after the camera finishes rendering the object
+	virtual void PostRender();
 
 protected:
 	GameObject(Scene* scene, GameObject *parent = NULL);
-	void LifeCycle();
+
+	/*Lifecycle*/
+	void PreEnable();
 	void Render();
 
 public:
@@ -56,5 +73,11 @@ protected:
 	Scene *scene;								//指向游戏对象存在的场景
 	GameObject *parent;							//父对象指针
 	std::list<GameObject*> childrenList;		//子对象列表
+
+	/*Status variable*/
+	bool isRendereringEnable = true;
+	bool isPreActive;
+	bool isActivity;
+
 };
 

@@ -7,7 +7,12 @@
 #include "GameObject.h"
 #include "Scene.h"
 
-MainWindow::MainWindow() 
+void MainWindow::framebuffer_size_callback(GLFWwindow * window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
+
+MainWindow::MainWindow()
 {
 	WindowInit(800, 600, "MainWindow");
 }
@@ -19,6 +24,7 @@ MainWindow::MainWindow(GLuint width, GLuint height, std::string title)
 
 MainWindow::~MainWindow()
 {
+	glfwTerminate();
 }
 
 void MainWindow::MainLoop()
@@ -30,18 +36,22 @@ void MainWindow::MainLoop()
 	Camera camera(&scene,&human);
 
 	human.transform.Translate(0, 0, 10);
+	human.transform.Rotate(0, 90, 0);
+	camera.transform.SetPosition(0, 7, 30);
+	camera.transform.SetRotation(0, 0, 0);
 
-	camera.transform.Translate(0,7,20);
 	camera.Update();
 	camera.Activate();
 
 	while (!glfwWindowShouldClose(window))
 	{
+		glfwGetWindowSize(this->window, &this->width, &this->height);
 		glfwSwapBuffers(window);
 		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		scene.Update();
+		camera.aspectRatio = (float)this->width / (float)this->height;
+		scene.FrameCycle();
 
 		glfwPollEvents();
 	}
@@ -60,4 +70,6 @@ void MainWindow::WindowInit(GLuint width, GLuint height, std::string title)
 	glfwMakeContextCurrent(window);
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glViewport(0, 0, width, height);
+
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 }

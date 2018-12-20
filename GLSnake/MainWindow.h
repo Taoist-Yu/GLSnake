@@ -8,6 +8,9 @@
 
 class MainWindow
 {
+private:
+	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
 public:
 	MainWindow();
 	MainWindow(GLuint width, GLuint height, std::string title);

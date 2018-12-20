@@ -9,7 +9,7 @@ void GameObject::Destroy(GameObject * gameObject)
 		Destroy(object);
 	}
 	gameObject->SetParent(NULL);
-	gameObject->scene->DeleteObject(gameObject);
+	gameObject->scene->RemoveObject(gameObject);
 	//Delete the dynamic memory applied by the new operator
 	delete gameObject->model;
 }
@@ -21,24 +21,6 @@ GameObject::GameObject(Scene * scene, GameObject * parent)
 	SetParent(parent);
 	scene->ObjectList.push_back(this);
 }
-
-void GameObject::LifeCycle()
-{
-	Update();
-	if (tag != camera)
-	{
-		Render();
-	}
-		
-}
-
-void GameObject::Render()
-{
-	shader.SetMat4("model", transform.ModelMatrix());
-	scene->ConfigShader(shader);
-	model->Draw(shader);
-}
-
 
 GameObject::GameObject(Scene* scene, const char *modelPath, GameObject *parent)
 	: GameObject(scene, parent)
@@ -88,7 +70,6 @@ void GameObject::SetParent(GameObject * parent)
 	} else {
 		this->transform.parent = NULL;
 	}
-
 }
 
 void GameObject::DeleteChild(GameObject * child)
@@ -105,11 +86,66 @@ void GameObject::DeleteChild(GameObject * child)
 	if (flag == false) {
 		Debug::Error("You are trying to delete a inexistent child");
 	}
+}
+
+void GameObject::SetActive(bool active)
+{
+	if (active == true) {
+		if (isActivity == false) {
+			isPreActive = true;
+		}
+		isActivity = true;
+	}
+	else {
+		isActivity = false;
+		isPreActive = false;
+	}
+}
+
+bool GameObject::GetActive()
+{
+	return isActivity;
+}
+
+void GameObject::EnableRendering()
+{
+	isRendereringEnable = true;
+}
+
+void GameObject::DisableRendring()
+{
+	isRendereringEnable = false;
+}
+
+void GameObject::OnEnable()
+{
 
 }
 
 void GameObject::Update()
 {
 	
+}
+
+void GameObject::PreRender()
+{
+
+}
+
+void GameObject::PreEnable()
+{
+	isPreActive = false;
+}
+
+void GameObject::Render()
+{
+	shader.SetMat4("model", transform.ModelMatrix());
+	this->scene->camera->CameraRender(shader);
+	model->Draw(shader);
+}
+
+void GameObject::PostRender()
+{
+
 }
 

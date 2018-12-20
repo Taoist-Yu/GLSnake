@@ -11,19 +11,42 @@ Scene::~Scene()
 {
 }
 
-void Scene::Update()
+void Scene::FrameCycle()
+{
+	Enable();
+	Update();
+	Renrer();
+}
+
+void Scene::Enable()
 {
 	for (GameObject* object : ObjectList) {
-		object->LifeCycle();
+		if (object->isPreActive) {
+			object->PreEnable();
+			object->OnEnable();
+		}
 	}
 }
 
-void Scene::ConfigShader(Shader & shader)
+void Scene::Update()
 {
-	camera->ConfigShader(shader);
+	for (GameObject* object : ObjectList) {
+		object->Update();
+	}
 }
 
-void Scene::DeleteObject(GameObject * gameObject)
+void Scene::Renrer()
+{
+	for (GameObject* object : ObjectList) {
+		if (object->isRendereringEnable) {
+			object->PreRender();
+			object->Render();
+			object->PostRender();
+		}
+	}
+}
+
+void Scene::RemoveObject(GameObject * gameObject)
 {
 	for (GameObject *object : ObjectList) {
 		if (object == gameObject) {

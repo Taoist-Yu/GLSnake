@@ -23,20 +23,12 @@ Transform::~Transform()
 
 glm::mat4 Transform::ModelMatrix()
 {
-	glm::mat4 matrix(1);
+	return GetTranslateMat() * GetRotationMat() * GetScaleMat();
+}
 
-	//translate
-	matrix = glm::translate(matrix, this->position);
-
-	//rotate
-	matrix = glm::rotate(matrix, glm::radians(this->rotation.x), glm::vec3(1, 0, 0));		//x axis
-	matrix = glm::rotate(matrix, glm::radians(this->rotation.y), glm::vec3(0, 1, 0));		//y axis
-	matrix = glm::rotate(matrix, glm::radians(this->rotation.z), glm::vec3(0, 0, 1));		//z axis
-
-	//scale
-	matrix = glm::scale(matrix, this->scale);
-
-	return matrix;
+glm::mat4 Transform::ModelInverse()
+{
+	return GetScaleInverse() * GetRotationInverse() * GetTranslateInverse();
 }
 
 void Transform::Translate(float x, float y, float z)
@@ -120,7 +112,10 @@ void Transform::SetPosition(glm::vec3 _position)
 		SetLocalPosition(_position);
 	}
 	else {
-		position = _position - parent->GetPositionVec();
+		position = glm::vec3(
+			parent->ModelInverse() *
+			glm::vec4(_position, 1.0f)
+		);
 	}
 }
 
@@ -166,7 +161,10 @@ glm::vec3 Transform::GetPositionVec()
 	if (parent == NULL) {
 		return GetLoaclPositionVec();
 	}
-	return GetLoaclPositionVec() + parent->GetPositionVec();
+	return glm::vec3(
+		parent->ModelMatrix() *
+		glm::vec4(this->GetLoaclPositionVec(), 1.0f)
+	);
 }
 
 glm::vec3 Transform::GetRotationVec()
@@ -189,7 +187,7 @@ glm::vec3 Transform::GetScaleVec()
 	}
 }
 
-glm::mat4 Transform::GetPositionMat()
+glm::mat4 Transform::GetTranslateMat()
 {
 	return glm::translate(glm::mat4(1), GetPositionVec());
 }
@@ -208,7 +206,7 @@ glm::mat4 Transform::GetScaleMat()
 	return glm::scale(glm::mat4(1),GetScaleVec());
 }
 
-glm::mat4 Transform::GetPositionInverse()
+glm::mat4 Transform::GetTranslateInverse()
 {
 	return glm::translate(glm::mat4(1), -GetPositionVec());
 }

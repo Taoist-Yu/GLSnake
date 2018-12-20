@@ -12,6 +12,7 @@ class Scene
 {
 //ÓÑÔªÉùÃ÷
 	friend void GameObject::Destroy(GameObject *gameObject);
+	friend void GameObject::Render();
 	friend GameObject::GameObject(Scene* scene, GameObject *parent);
 	friend void Camera::Activate();
 
@@ -19,11 +20,15 @@ public:
 	Scene();
 	~Scene();
 
-	void Update();
-	void ConfigShader(Shader &shader);
+	void FrameCycle();
 
 private:
-	void DeleteObject(GameObject *gameObject);
+	//Frame cycle
+	void Enable();
+	void Update();
+	void Renrer();
+
+	void RemoveObject(GameObject *gameObject);
 
 private:
 	std::list<GameObject*> ObjectList;			//The list of gameObject

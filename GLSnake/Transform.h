@@ -18,6 +18,7 @@ public:
 	~Transform();
 
 	glm::mat4 ModelMatrix();
+	glm::mat4 ModelInverse();
 
 	void Translate(float x,float y,float z);
 	void Rotate(float x, float y, float z);
@@ -52,11 +53,11 @@ public:
 	glm::vec3 GetScaleVec();
 
 	//Get transform matrix in world space
-	glm::mat4 GetPositionMat();
+	glm::mat4 GetTranslateMat();
 	glm::mat4 GetRotationMat();
 	glm::mat4 GetScaleMat();
 	//Get transform inverse matrix
-	glm::mat4 GetPositionInverse();
+	glm::mat4 GetTranslateInverse();
 	glm::mat4 GetRotationInverse();
 	glm::mat4 GetScaleInverse();
 
