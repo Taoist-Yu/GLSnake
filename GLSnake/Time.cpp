@@ -47,4 +47,6 @@ void Timer::TimerUpdate()
 	float newTime = (float)clock() / 1000;
 	deltaTime = newTime - time;
 	time = newTime;
+	if (deltaTime > 1)
+		deltaTime = 0;
 }

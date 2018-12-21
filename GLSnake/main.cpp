@@ -3,17 +3,13 @@
 
 #include<iostream>
 
-#include "GLMainWindow.h"
 #include "MainWindow.h"
 #include "Shader.h"
 #include "Mesh.h"
 
-int WINAPI WinMain(HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPSTR lpCmdLine,
-	int nCmdShow)
+int main()
 {
-	GLMainWindow window(hInstance, nCmdShow);
+	MainWindow window;
 	window.MainLoop();
 	return 0;
 }
