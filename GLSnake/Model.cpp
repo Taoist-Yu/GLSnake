@@ -8,7 +8,7 @@ std::vector<Mesh::Texture> Model::textures_loaded;
 
 Model::Model()
 {
-	meshes.push_back(new Mesh());
+	//meshes.push_back(new Mesh());
 }
 
 Model::Model(const char * path)

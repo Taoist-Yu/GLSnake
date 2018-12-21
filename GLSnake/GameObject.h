@@ -45,30 +45,26 @@ public:
 	void EnableRendering();
 	void DisableRendring();
 
+protected:
+	GameObject(Scene* scene, GameObject *parent = NULL);
+
 	/*Lifecycle*/
-	//void PreEnable();		non-configurable
+	void PreEnable();
 	//is called before the first Update() after activate
 	virtual void OnEnable();
 	//is called once per framed 
 	virtual void Update();
 	//is called before Renderer, you can do some extern configuration to your custom shader 
 	virtual void PreRender();
-	//void Renderer();		non-configurable
+	void Render();
 	//is called after the camera finishes rendering the object
 	virtual void PostRender();
-
-protected:
-	GameObject(Scene* scene, GameObject *parent = NULL);
-
-	/*Lifecycle*/
-	void PreEnable();
-	void Render();
 
 public:
 	Transform transform;
 
 protected:
-	Shader shader;
+	Shader *shader;
 	Model *model;
 	Scene *scene;								//指向游戏对象存在的场景
 	GameObject *parent;							//父对象指针

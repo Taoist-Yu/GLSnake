@@ -12,6 +12,7 @@ void GameObject::Destroy(GameObject * gameObject)
 	gameObject->scene->RemoveObject(gameObject);
 	//Delete the dynamic memory applied by the new operator
 	delete gameObject->model;
+	delete gameObject->shader;
 }
 
 GameObject::GameObject(Scene * scene, GameObject * parent)
@@ -47,12 +48,12 @@ GameObject::~GameObject()
 
 void GameObject::SetShader(Shader & shader)
 {
-	this->shader = shader;
+	this->shader = new Shader(shader);
 }
 
 void GameObject::SetShader(const char * vShaderFile, const char * fShaderFile)
 {
-	this->shader = Shader(vShaderFile, fShaderFile);
+	this->shader = new Shader(vShaderFile, fShaderFile);
 }
 
 void GameObject::SetParent(GameObject * parent)
@@ -139,9 +140,10 @@ void GameObject::PreEnable()
 
 void GameObject::Render()
 {
-	shader.SetMat4("model", transform.ModelMatrix());
-	this->scene->camera->CameraRender(shader);
-	model->Draw(shader);
+	shader->SetMat4("model", transform.ModelMatrix());
+	this->scene->camera->CameraRender(*shader);
+	this->scene->ApplicateLight(*shader);
+	model->Draw(*shader);
 }
 
 void GameObject::PostRender()

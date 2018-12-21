@@ -15,6 +15,8 @@
 #include "Shader.h"
 #include "Mesh.h"
 
+class Cube;
+
 class Model
 {
 private:

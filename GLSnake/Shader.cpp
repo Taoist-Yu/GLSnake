@@ -49,6 +49,20 @@ void Shader::SetFloat(const std::string name, float value) const
 	this->Disable();
 }
 
+void Shader::SetVec3(const std::string name, glm::vec3 value) const
+{
+	this->Enable();
+	glUniform3f(glGetUniformLocation(id, name.c_str()), value.x, value.y, value.z);
+	this->Disable();
+}
+
+void Shader::SetVec4(const std::string name, glm::vec4 value) const
+{
+	this->Enable();
+	glUniform4f(glGetUniformLocation(id, name.c_str()), value.x, value.y, value.z, value.w);
+	this->Disable();
+}
+
 void Shader::SetTextureUnit(const std::string name, int value) const
 {
 	this->Enable();

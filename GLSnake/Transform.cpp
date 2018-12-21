@@ -43,7 +43,7 @@ void Transform::Rotate(float x, float y, float z)
 
 void Transform::Scale(float x, float y, float z)
 {
-	this->scale = this->scale + glm::vec3(x, y, z);
+	this->scale = this->scale * glm::vec3(x, y, z);
 }
 
 void Transform::Translate(glm::vec3 _translate)

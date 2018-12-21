@@ -6,6 +6,9 @@
 #include "Camera.h"
 #include "GameObject.h"
 #include "Scene.h"
+#include "Time.h"
+
+#include "Ball.h"
 
 void MainWindow::framebuffer_size_callback(GLFWwindow * window, int width, int height)
 {
@@ -33,18 +36,25 @@ void MainWindow::MainLoop()
 	Shader shader("shader.vert", "shader.frag");
 	Scene scene;
 	GameObject human(&scene, "model/nanosuit/nanosuit.obj", shader);
+	GameObject plane(&scene, "model/GrassPlane/Grass.obj", shader);
+	Ball ball(&scene);
 	Camera camera(&scene,&human);
 
-	human.transform.Translate(0, 0, 10);
-	human.transform.Rotate(0, 90, 0);
-	camera.transform.SetPosition(0, 7, 30);
-	camera.transform.SetRotation(0, 0, 0);
+	plane.transform.Scale(100, 1, 100);
+	plane.transform.Translate(0, -0.5f, 0);
+	ball.transform.Translate(-3, 2, 0);
+	camera.transform.Translate(0, 20, 20);
+	camera.transform.Rotate(-30, 0, 0);
 
 	camera.Update();
 	camera.Activate();
 
 	while (!glfwWindowShouldClose(window))
 	{
+		//Timer
+		Time.TimerUpdate();
+
+		//Render
 		glfwGetWindowSize(this->window, &this->width, &this->height);
 		glfwSwapBuffers(window);
 		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
