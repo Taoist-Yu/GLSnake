@@ -5,11 +5,17 @@
 
 #include<string>
 #include<fstream>
+#include<list>
+
+#include "GameObject.h"
 
 class MainWindow
 {
+	friend class Input;
 private:
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+	//Input Event
+	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 public:
 	MainWindow();
@@ -17,6 +23,9 @@ public:
 	~MainWindow();
 
 	void MainLoop();
+
+public:
+	std::list<GameObject*>Observers;
 
 private:
 	int width;

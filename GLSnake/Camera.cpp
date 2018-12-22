@@ -1,5 +1,7 @@
 #include "camera.h"
 #include "Scene.h"
+#include "Input.h"
+#include "Time.h"
 
 Camera::Camera(Scene *scene, GameObject *parent)
 	: GameObject(scene, parent)
@@ -14,7 +16,11 @@ Camera::~Camera()
 }
 
 void Camera::Update()
-{
+{	
+	if (Input::GetKey(GLFW_KEY_W))
+		transform.Translate(0, 0, -10*Time.GetDeltaTime());
+	if (Input::GetKey(GLFW_KEY_S))
+		transform.Translate(0, 0, 10*Time.GetDeltaTime());
 	view = glm::mat4(1) *
 		transform.GetRotationInverse() *
 		transform.GetTranslateInverse();

@@ -48,6 +48,8 @@ public:
 protected:
 	GameObject(Scene* scene, GameObject *parent = NULL);
 
+	
+
 	/*Lifecycle*/
 	void PreEnable();
 	//is called before the first Update() after activate

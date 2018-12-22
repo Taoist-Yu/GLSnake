@@ -63,6 +63,9 @@
     <ClCompile Include="Ball.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -98,6 +101,9 @@
     <ClInclude Include="Ball.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.frag">
@@ -111,6 +117,9 @@
     </None>
     <None Include="ball.frag">
       <Filter>资源文件\Ball</Filter>
+    </None>
+    <None Include="npr.frag">
+      <Filter>资源文件\Default</Filter>
     </None>
   </ItemGroup>
 </Project>
