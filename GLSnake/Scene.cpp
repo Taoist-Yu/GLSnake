@@ -82,6 +82,7 @@ void Scene::RemoveObject(GameObject * gameObject)
 	for (GameObject *object : ObjectList) {
 		if (object == gameObject) {
 			ObjectList.remove(object);
+			object->scene = NULL;
 			break;
 		}
 	}

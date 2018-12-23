@@ -7,6 +7,7 @@ SnakeNode::SnakeNode(Scene *scene, GameObject *parent)
 {
 	next = NULL;
 	last = NULL;
+	tag = Tag::snakeBody;
 }
 
 

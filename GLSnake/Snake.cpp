@@ -78,6 +78,14 @@ void Snake::InitSnake()
 
 void Snake::ChangeHead(SnakeNode* head)
 {
+	//change tag and color
+	if (this->head != NULL) {
+		this->head->tag = Tag::snakeBody;
+		this->head->SetColor(glm::vec4(this->bodyColor, 1.0f));
+	}
+	head->tag = Tag::snakeHead;
+	head->SetColor(glm::vec4(this->headColor, 1.0f));
+
 	this->head = head;
 	if (camera == NULL) {
 		camera = new Camera(scene, head);

@@ -54,7 +54,6 @@ void MainWindow::MainLoop()
 	Confine confine(&level1);
 	Snake snake(&level1);
 
-
 	while (!glfwWindowShouldClose(window))
 	{
 		//Timer
@@ -63,7 +62,7 @@ void MainWindow::MainLoop()
 		//Render
 		glfwGetWindowSize(this->window, &this->width, &this->height);
 		glfwSwapBuffers(window);
-		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+		glClearColor(0.05f, 0.5f, 0.05f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		level1.FrameCycle();

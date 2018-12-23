@@ -5,8 +5,12 @@
 
 void GameObject::Destroy(GameObject * gameObject)
 {
-	for (GameObject *object : gameObject->childrenList) {
-		Destroy(object);
+	//The Object has been destroied
+	if (gameObject->scene == NULL)
+		return;
+	//Destroy subobject
+	while (!gameObject->childrenList.empty()) {
+		Destroy(*gameObject->childrenList.begin());
 	}
 	gameObject->SetParent(NULL);
 	gameObject->scene->RemoveObject(gameObject);
