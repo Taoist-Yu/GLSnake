@@ -8,9 +8,6 @@
     <Filter Include="资源文件\Default">
       <UniqueIdentifier>{bdb50398-8bd2-46bb-91fe-cbb6756594da}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件\Ball">
-      <UniqueIdentifier>{e51c19c4-2c14-4b94-ab26-245b7236d593}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
@@ -18,6 +15,12 @@
     <Filter Include="源文件">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Ball">
+      <UniqueIdentifier>{e51c19c4-2c14-4b94-ab26-245b7236d593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Confine">
+      <UniqueIdentifier>{46a5df5b-eea8-4f66-b5f3-1d9def1b9a80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +69,15 @@
     <ClCompile Include="Input.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Confine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Snake.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeNode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -104,6 +116,15 @@
     <ClInclude Include="Input.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Confine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Snake.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeNode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.frag">
@@ -115,11 +136,17 @@
     <None Include="ball.vert">
       <Filter>资源文件\Ball</Filter>
     </None>
+    <None Include="npr.frag">
+      <Filter>资源文件\Default</Filter>
+    </None>
     <None Include="ball.frag">
       <Filter>资源文件\Ball</Filter>
     </None>
-    <None Include="npr.frag">
-      <Filter>资源文件\Default</Filter>
+    <None Include="confine.vert">
+      <Filter>资源文件\Confine</Filter>
+    </None>
+    <None Include="confine.frag">
+      <Filter>资源文件\Confine</Filter>
     </None>
   </ItemGroup>
 </Project>

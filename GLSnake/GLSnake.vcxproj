@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Confine.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -178,6 +179,8 @@
       <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</BufferSecurityCheck>
       <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
     </ClCompile>
+    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SnakeNode.cpp" />
     <ClCompile Include="src\glad.cpp" />
     <ClCompile Include="src\stb_image.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -186,6 +189,7 @@
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Confine.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
@@ -194,12 +198,16 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Snake.h" />
+    <ClInclude Include="SnakeNode.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ball.frag" />
     <None Include="ball.vert" />
+    <None Include="confine.frag" />
+    <None Include="confine.vert" />
     <None Include="npr.frag" />
     <None Include="shader.frag" />
     <None Include="shader.vert" />

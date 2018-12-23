@@ -50,7 +50,7 @@ public:
 	//Get transform vertor in world space
 	glm::vec3 GetPositionVec();
 	glm::vec3 GetRotationVec();
-	glm::vec3 GetScaleVec();
+	glm::vec3 GetScaleVec(); 
 
 	//Get transform matrix in world space
 	glm::mat4 GetTranslateMat();

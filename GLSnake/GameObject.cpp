@@ -130,7 +130,7 @@ void GameObject::Update()
 
 void GameObject::PreRender()
 {
-
+	
 }
 
 void GameObject::PreEnable()
@@ -144,6 +144,7 @@ void GameObject::Render()
 	this->scene->camera->CameraRender(*shader);
 	this->scene->ApplicateLight(*shader);
 	model->Draw(*shader);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void GameObject::PostRender()

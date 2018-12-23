@@ -20,7 +20,13 @@ public:
 	enum Tag
 	{
 		defaultObject,
+		emptyObject,
 		camera,
+		snakeHead,
+		snakeBody,
+		food,
+		poison,
+		bomb,
 	};
 	Tag tag = defaultObject;
 
@@ -29,7 +35,7 @@ public:
 	GameObject(Scene* scene, const char *modelPath, Shader &shader, GameObject *parent = NULL);
 	GameObject(Scene* scene, const char *modelPath, const char* vShaderFile, const char* fShaderFile, GameObject *parent = NULL);
 
-	~GameObject();
+	virtual ~GameObject();
 
 	//Shaderœ‡πÿ
 	void SetShader(Shader &shader);
