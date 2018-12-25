@@ -16,9 +16,15 @@ class Scene
 	friend void Camera::Activate();
 
 public:
+	enum GameStatus {
+		normal,
+		pause
+	};
+
 	Scene();
 	~Scene();
 
+	void Activate();
 	void FrameCycle();
 
 	//light
@@ -28,6 +34,10 @@ public:
 	glm::vec3 GetDirectedLightColor();
 	glm::vec3 GetAmbientLightColor();
 
+	//Status
+	void SetStatus(GameStatus status);
+	GameStatus GetStatus();
+
 private:
 	//Frame cycle
 	void Enable();
@@ -36,9 +46,15 @@ private:
 
 	void RemoveObject(GameObject *gameObject);
 
+public:
+	float timeScale = 1;
+
 private:
+
+	GameStatus status = normal;
+
 	std::list<GameObject*> ObjectList;			//The list of gameObject
-	Camera *camera;								//The active camera			
+	Camera *camera;								//The active camera	
 
 	glm::vec3 lightDirection;					//The direction of directed light
 	glm::vec3 directedLightColor;				//The color of directed light

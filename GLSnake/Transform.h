@@ -10,6 +10,9 @@ class Transform
 friend class GameObject;
 
 public:
+	static glm::vec4 Rotate(glm::vec4 v, glm::vec3 axis, float angle);
+
+public:
 	GameObject *const gameObject;
 	Transform * parent;
 
@@ -61,6 +64,10 @@ public:
 	glm::mat4 GetRotationInverse();
 	glm::mat4 GetScaleInverse();
 
+protected:
+	glm::vec3 GetX();
+	glm::vec3 GetY();
+	glm::vec3 GetZ();
 
 protected:
 	glm::vec3 position;

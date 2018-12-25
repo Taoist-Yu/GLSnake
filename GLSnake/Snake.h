@@ -28,12 +28,12 @@ private:
 	Camera* camera;			//Camera will follow snake head
 	SnakeNode* head;
 	SnakeNode* tail;
-	glm::vec3 direction;
+	glm::vec3 directionEuler = glm::vec3(0, 0, 0);
 	int length;
-	float speed;			//Move speed of the snake
-	float sensitivity;		//The speed of changing view
+	float speed = 10.0f;			//Move speed of the snake
+	float sensitivity = 70.0f;		//The speed of changing view
 
-	const float spacing = 1.0f;
+	const float spacing = 2.0f;
 	const glm::vec3 headColor = glm::vec3(1, 0, 0);
 	const glm::vec3 bodyColor = glm::vec3(0, 1, 1);
 	

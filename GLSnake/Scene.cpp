@@ -1,20 +1,29 @@
 #include "Scene.h"
 #include "Time.h"
-
+#include "MainWindow.h"
 
 Scene::Scene()
 {
 	lightDirection = glm::vec3(0, -1, 0);
 	directedLightColor = glm::vec3(1, 1, 1);
-	ambientLightColor = glm::vec3(0.1, 0.1, 0.1);
+	ambientLightColor = glm::vec3(0.2, 0.2, 0.2);
 }
 
 Scene::~Scene()
 {
 }
 
+void Scene::Activate()
+{
+	MainWindow::Instance()->scene = this;
+	Time.SetTimeScale(timeScale);
+}
+
 void Scene::FrameCycle()
 {
+	float newAspectRatio = (float)MainWindow::Instance()->GetWidth() / (float)MainWindow::Instance()->GetHeight();
+	if(newAspectRatio > 0)
+		camera->aspectRatio = newAspectRatio;
 	Enable();
 	Update();
 	Renrer();
@@ -48,6 +57,16 @@ glm::vec3 Scene::GetAmbientLightColor()
 	return ambientLightColor;
 }
 
+void Scene::SetStatus(GameStatus status)
+{
+	this->status = status;
+}
+
+Scene::GameStatus Scene::GetStatus()
+{
+	return this->status;
+}
+
 void Scene::Enable()
 {
 	for (GameObject* object : ObjectList) {
@@ -60,7 +79,7 @@ void Scene::Enable()
 
 void Scene::Update()
 {
-	lightDirection = glm::rotate(glm::mat4(1), Time.GetDeltaTime(), glm::vec3(1, 0, 0)) * glm::vec4(GetLightDirection(),1.0f);
+//	lightDirection = glm::rotate(glm::mat4(1), Time.GetDeltaTime(), glm::vec3(1, 0, 0)) * glm::vec4(GetLightDirection(),1.0f);
 	for (GameObject* object : ObjectList) {
 		object->Update();
 	}

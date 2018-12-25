@@ -14,7 +14,7 @@ public:
 	float FOV = 45.0f;
 	float aspectRatio = 4.f / 3.f;
 	float nearPlane = 0.1f;
-	float farPlane = 100.0f;
+	float farPlane = 1000.0f;
 
 public:
 	Camera(Scene *scene, GameObject *parent = NULL);

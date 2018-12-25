@@ -2,6 +2,13 @@
 #include "GameObject.h"
 
 
+glm::vec4 Transform::Rotate(glm::vec4 v, glm::vec3 axis, float angle)
+{
+	glm::mat4 m(1);
+	m = glm::rotate(m, glm::radians(angle), axis);
+	return m * v;
+}
+
 Transform::Transform(GameObject *gameObject)
 	: gameObject(gameObject)
 {
@@ -33,7 +40,7 @@ glm::mat4 Transform::ModelInverse()
 
 void Transform::Translate(float x, float y, float z)
 {
-	this->position = this->position + glm::vec3(x, y, z);
+	this->position = this->position + glm::vec3(GetRotationMat() * glm::vec4(x, y, z, 1));
 }
 
 void Transform::Rotate(float x, float y, float z)
@@ -228,4 +235,19 @@ glm::mat4 Transform::GetScaleInverse()
 		1 / GetScaleVec().z
 	);
 	return glm::scale(glm::mat4(1), inverseScale);
+}
+
+glm::vec3 Transform::GetX()
+{
+	return this->GetRotationMat() * glm::vec4(1, 0, 0, 1);
+}
+
+glm::vec3 Transform::GetY()
+{
+	return this->GetRotationMat() * glm::vec4(0, 1, 0, 1);
+}
+
+glm::vec3 Transform::GetZ()
+{
+	return this->GetRotationMat() * glm::vec4(0, 0, 1, 1);
 }

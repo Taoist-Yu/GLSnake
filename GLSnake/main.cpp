@@ -9,7 +9,8 @@
 
 int main()
 {
-	MainWindow window;
-	window.MainLoop();
+	
+	MainWindow::CreateInstance();
+	MainWindow::Instance()->MainLoop();
 	return 0;
 }
