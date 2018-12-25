@@ -28,7 +28,6 @@ private:
 	Camera* camera;			//Camera will follow snake head
 	SnakeNode* head;
 	SnakeNode* tail;
-	glm::vec3 directionEuler = glm::vec3(0, 0, 0);
 	int length;
 	float speed = 10.0f;			//Move speed of the snake
 	float sensitivity = 70.0f;		//The speed of changing view

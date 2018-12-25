@@ -74,7 +74,7 @@ void Snake::InitSnake()
 	tail = new SnakeNode(scene, this);
 	ChangeHead(tail);
 	length = 1;
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 100; i++) {
 		this->Incress();
 	}
 }
@@ -102,19 +102,21 @@ void Snake::Update()
 	//Input Handler
 	if(scene->GetStatus() == Scene::normal)
 	{
+		if (Input::GetKey(GLFW_KEY_W)) {
+			head->transform.Rotate(sensitivity * Time.GetDeltaTime(), glm::vec3(1, 0, 0));
+		}
+		if (Input::GetKey(GLFW_KEY_S)) {
+			head->transform.Rotate(sensitivity * Time.GetDeltaTime(), glm::vec3(-1, 0, 0));
+		}
 		if (Input::GetKey(GLFW_KEY_A)) {
-			directionEuler.y += sensitivity * Time.GetDeltaTime();
+			head->transform.Rotate(sensitivity * Time.GetDeltaTime(), glm::vec3(0, 1, 0));
 		}
 		if (Input::GetKey(GLFW_KEY_D)) {
-			directionEuler.y -= sensitivity * Time.GetDeltaTime();
+			head->transform.Rotate(sensitivity * Time.GetDeltaTime(), glm::vec3(0, -1, 0));
 		}
-		if (Input::GetKeyDown(GLFW_KEY_J)) {
-			this->Incress();
-		}
-		if (Input::GetKeyDown(GLFW_KEY_K)) {
-			this->Decress();
-		}
-		directionEuler.x += Input::GetMouseMove().y * sensitivity * Time.GetDeltaTime();
+
+		head->transform.Rotate(Input::GetMouseMove().y * sensitivity * Time.GetDeltaTime(), glm::vec3(1, 0, 0));
+		head->transform.Rotate(Input::GetMouseMove().x * sensitivity * Time.GetDeltaTime(), -glm::vec3(0, 1, 0));
 	}
 
 	//Traverse all snake node and change position
@@ -126,7 +128,6 @@ void Snake::Update()
 		p = p->last;
 	}
 	//Move the head
-	head->transform.SetRotation(directionEuler);
 	head->transform.Translate(glm::vec3(0, 0, -1) * speed * Time.GetDeltaTime());
 
 	//Traverse all snake node and normalize the spacing

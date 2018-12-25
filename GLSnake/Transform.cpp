@@ -19,7 +19,7 @@ Transform::Transform(GameObject *gameObject)
 		this->parent = &gameObject->parent->transform;
 	}
 	position = glm::vec3(0, 0, 0);
-	rotation = glm::vec3(0, 0, 0);
+	rotation = glm::mat4(1);
 	scale = glm::vec3(1, 1, 1);
 }
 
@@ -45,7 +45,11 @@ void Transform::Translate(float x, float y, float z)
 
 void Transform::Rotate(float x, float y, float z)
 {
-	this->rotation = this->rotation + glm::vec3(x, y, z);
+	glm::mat4 matrix(1);
+	matrix = glm::rotate(matrix, glm::radians(x), glm::vec3(1, 0, 0));			//x axis
+	matrix = glm::rotate(matrix, glm::radians(y), glm::vec3(0, 1, 0));			//y axis
+	matrix = glm::rotate(matrix, glm::radians(z), glm::vec3(0, 0, 1));			//z axis
+	this->rotation = matrix * this->rotation;
 }
 
 void Transform::Scale(float x, float y, float z)
@@ -68,6 +72,11 @@ void Transform::Scale(glm::vec3 _scale)
 	this->Scale(_scale.x, _scale.y, _scale.z);
 }
 
+void Transform::Rotate(float angle, glm::vec3(axis))
+{
+	this->rotation = glm::rotate(this->rotation, glm::radians(angle), axis);
+}
+
 void Transform::SetLocalPosition(float x, float y, float z)
 {
 	this->position = glm::vec3(x, y, z);
@@ -75,7 +84,11 @@ void Transform::SetLocalPosition(float x, float y, float z)
 
 void Transform::SetLocalRotation(float x, float y, float z)
 {
-	this->rotation = glm::vec3(x, y, z);
+	glm::mat4 matrix(1);
+	matrix = glm::rotate(matrix, glm::radians(x), glm::vec3(1, 0, 0));			//x axis
+	matrix = glm::rotate(matrix, glm::radians(y), glm::vec3(0, 1, 0));			//y axis
+	matrix = glm::rotate(matrix, glm::radians(z), glm::vec3(0, 0, 1));			//z axis
+	this->rotation = matrix;
 }
 
 void Transform::SetLocalScale(float x, float y, float z)
@@ -90,7 +103,7 @@ void Transform::SetLocalPosition(glm::vec3 _position)
 
 void Transform::SetLocalRotation(glm::vec3 _rotation)
 {
-	this->rotation = _rotation;
+	SetLocalRotation(_rotation.x, _rotation.y, _rotation.z);
 }
 
 void Transform::SetLocalScale(glm::vec3 _scale)
@@ -132,7 +145,11 @@ void Transform::SetRotation(glm::vec3 _rotation)
 		SetLocalRotation(_rotation);
 	}
 	else {
-		rotation = _rotation - parent->GetRotationVec();
+		glm::mat4 matrix(1);
+		matrix = glm::rotate(matrix, glm::radians(_rotation.x), glm::vec3(1, 0, 0));			//x axis
+		matrix = glm::rotate(matrix, glm::radians(_rotation.y), glm::vec3(0, 1, 0));			//y axis
+		matrix = glm::rotate(matrix, glm::radians(_rotation.z), glm::vec3(0, 0, 1));			//z axis
+		this->rotation = matrix * parent->GetRotationInverse();
 	}
 }
 
@@ -153,11 +170,6 @@ glm::vec3 Transform::GetLoaclPositionVec()
 	return this->position;
 }
 
-glm::vec3 Transform::GetLocalRotationVec()
-{
-	return this->rotation;
-}
-
 glm::vec3 Transform::GetLocalScaleVec()
 {
 	return this->scale;
@@ -174,16 +186,6 @@ glm::vec3 Transform::GetPositionVec()
 	);
 }
 
-glm::vec3 Transform::GetRotationVec()
-{
-	if (parent == NULL) {
-		return GetLocalRotationVec();
-	}
-	else {
-		return GetLocalRotationVec() + parent->GetRotationVec();
-	}
-}
-
 glm::vec3 Transform::GetScaleVec()
 {
 	if (parent == NULL) {
@@ -194,6 +196,16 @@ glm::vec3 Transform::GetScaleVec()
 	}
 }
 
+glm::mat4 Transform::GetLocalRotationMat()
+{
+	return this->rotation;
+}
+
+glm::mat4 Transform::GetLocalRotationInverse()
+{
+	return glm::inverse(this->rotation);
+}
+
 glm::mat4 Transform::GetTranslateMat()
 {
 	return glm::translate(glm::mat4(1), GetPositionVec());
@@ -201,11 +213,12 @@ glm::mat4 Transform::GetTranslateMat()
 
 glm::mat4 Transform::GetRotationMat()
 {
-	glm::mat4 matrix(1);
-	matrix = glm::rotate(matrix, glm::radians(GetRotationVec().x), glm::vec3(1, 0, 0));		//x axis
-	matrix = glm::rotate(matrix, glm::radians(GetRotationVec().y), glm::vec3(0, 1, 0));		//y axis
-	matrix = glm::rotate(matrix, glm::radians(GetRotationVec().z), glm::vec3(0, 0, 1));		//z axis
-	return matrix;
+	if (parent == NULL) {
+		return GetLocalRotationMat();
+	}
+	else {
+		return GetLocalRotationMat() * parent->GetRotationMat();
+	}
 }
 
 glm::mat4 Transform::GetScaleMat()
@@ -220,11 +233,12 @@ glm::mat4 Transform::GetTranslateInverse()
 
 glm::mat4 Transform::GetRotationInverse()
 {
-	glm::mat4 matrix(1);
-	matrix = glm::rotate(matrix, glm::radians(-GetRotationVec().x), glm::vec3(1, 0, 0));		//x axis
-	matrix = glm::rotate(matrix, glm::radians(-GetRotationVec().y), glm::vec3(0, 1, 0));		//y axis
-	matrix = glm::rotate(matrix, glm::radians(-GetRotationVec().z), glm::vec3(0, 0, 1));		//z axis
-	return matrix;
+	if (parent == NULL) {
+		return GetLocalRotationInverse();
+	}
+	else {
+		return GetLocalRotationInverse() * parent->GetRotationInverse();
+	}
 }
 
 glm::mat4 Transform::GetScaleInverse()

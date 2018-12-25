@@ -29,6 +29,7 @@ public:
 	void Translate(glm::vec3 _translate);
 	void Rotate(glm::vec3 _rotation);
 	void Scale(glm::vec3 _scale);
+	void Rotate(float angle, glm::vec3(axis));
 
 	//Set transform in the local space
 	void SetLocalPosition(float x, float y, float z);
@@ -48,30 +49,32 @@ public:
 
 	//Get transform vector in local space 
 	glm::vec3 GetLoaclPositionVec();
-	glm::vec3 GetLocalRotationVec();
 	glm::vec3 GetLocalScaleVec();
-	//Get transform vertor in world space
+	//Get transform vector in world space
 	glm::vec3 GetPositionVec();
-	glm::vec3 GetRotationVec();
 	glm::vec3 GetScaleVec(); 
+
+	//Get rotation mat in local space
+	glm::mat4 GetLocalRotationMat();
+	glm::mat4 GetLocalRotationInverse();
 
 	//Get transform matrix in world space
 	glm::mat4 GetTranslateMat();
 	glm::mat4 GetRotationMat();
 	glm::mat4 GetScaleMat();
-	//Get transform inverse matrix
+	//Get transform inverse matrix in world space
 	glm::mat4 GetTranslateInverse();
 	glm::mat4 GetRotationInverse();
 	glm::mat4 GetScaleInverse();
 
-protected:
+	//Get local axis in world space
 	glm::vec3 GetX();
 	glm::vec3 GetY();
 	glm::vec3 GetZ();
 
 protected:
 	glm::vec3 position;
-	glm::vec3 rotation;
+	glm::mat4 rotation;
 	glm::vec3 scale;
 };
 
