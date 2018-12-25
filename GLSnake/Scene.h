@@ -42,18 +42,19 @@ public:
 	//
 	void AttachSkybox(Skybox *skybox);
 
-private:
+protected:
 	//Frame cycle
 	void Enable();
 	void Update();
 	void Renrer();
+	virtual void Postcycle();
 
 	void RemoveObject(GameObject *gameObject);
 
 public:
 	float timeScale = 1;
 
-private:
+protected:
 
 	GameStatus status = normal;
 

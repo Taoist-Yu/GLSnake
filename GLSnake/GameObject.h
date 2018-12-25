@@ -80,8 +80,8 @@ protected:
 
 	/*Status variable*/
 	bool isRendereringEnable = true;
-	bool isPreActive;
-	bool isActivity;
+	bool isPreActive = true;
+	bool isActivity = true;
 
 };
 

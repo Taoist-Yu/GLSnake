@@ -165,17 +165,17 @@ void Transform::SetScale(glm::vec3 _scale)
 	}
 }
 
-glm::vec3 Transform::GetLoaclPositionVec()
+glm::vec3 Transform::GetLoaclPositionVec() const
 {
 	return this->position;
 }
 
-glm::vec3 Transform::GetLocalScaleVec()
+glm::vec3 Transform::GetLocalScaleVec() const
 {
 	return this->scale;
 }
 
-glm::vec3 Transform::GetPositionVec()
+glm::vec3 Transform::GetPositionVec() const
 {
 	if (parent == NULL) {
 		return GetLoaclPositionVec();
@@ -186,7 +186,7 @@ glm::vec3 Transform::GetPositionVec()
 	);
 }
 
-glm::vec3 Transform::GetScaleVec()
+glm::vec3 Transform::GetScaleVec() const
 {
 	if (parent == NULL) {
 		return GetLocalScaleVec();
@@ -196,22 +196,22 @@ glm::vec3 Transform::GetScaleVec()
 	}
 }
 
-glm::mat4 Transform::GetLocalRotationMat()
+glm::mat4 Transform::GetLocalRotationMat() const
 {
 	return this->rotation;
 }
 
-glm::mat4 Transform::GetLocalRotationInverse()
+glm::mat4 Transform::GetLocalRotationInverse() const
 {
 	return glm::inverse(this->rotation);
 }
 
-glm::mat4 Transform::GetTranslateMat()
+glm::mat4 Transform::GetTranslateMat() const
 {
 	return glm::translate(glm::mat4(1), GetPositionVec());
 }
 
-glm::mat4 Transform::GetRotationMat()
+glm::mat4 Transform::GetRotationMat() const
 {
 	if (parent == NULL) {
 		return GetLocalRotationMat();
@@ -221,17 +221,17 @@ glm::mat4 Transform::GetRotationMat()
 	}
 }
 
-glm::mat4 Transform::GetScaleMat()
+glm::mat4 Transform::GetScaleMat() const
 {
 	return glm::scale(glm::mat4(1),GetScaleVec());
 }
 
-glm::mat4 Transform::GetTranslateInverse()
+glm::mat4 Transform::GetTranslateInverse() const
 {
 	return glm::translate(glm::mat4(1), -GetPositionVec());
 }
 
-glm::mat4 Transform::GetRotationInverse()
+glm::mat4 Transform::GetRotationInverse() const
 {
 	if (parent == NULL) {
 		return GetLocalRotationInverse();
@@ -241,7 +241,7 @@ glm::mat4 Transform::GetRotationInverse()
 	}
 }
 
-glm::mat4 Transform::GetScaleInverse()
+glm::mat4 Transform::GetScaleInverse() const
 {
 	glm::vec3 inverseScale(
 		1 / GetScaleVec().x,
@@ -251,17 +251,17 @@ glm::mat4 Transform::GetScaleInverse()
 	return glm::scale(glm::mat4(1), inverseScale);
 }
 
-glm::vec3 Transform::GetX()
+glm::vec3 Transform::GetX() const
 {
 	return this->GetRotationMat() * glm::vec4(1, 0, 0, 1);
 }
 
-glm::vec3 Transform::GetY()
+glm::vec3 Transform::GetY() const
 {
 	return this->GetRotationMat() * glm::vec4(0, 1, 0, 1);
 }
 
-glm::vec3 Transform::GetZ()
+glm::vec3 Transform::GetZ() const
 {
 	return this->GetRotationMat() * glm::vec4(0, 0, 1, 1);
 }

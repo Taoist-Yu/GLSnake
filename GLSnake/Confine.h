@@ -5,6 +5,8 @@ class Confine :
 	public GameObject
 {
 public:
+	static const int radius;
+public:
 	Confine(Scene *scene, GameObject *parent = NULL);
 	~Confine();
 

@@ -18,6 +18,9 @@ public:
 	void Decress();
 
 	void ActivateCamera();
+	const SnakeNode* GetHead();
+
+	void OnEatFood();
 
 private:
 	void InitSnake();

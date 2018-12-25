@@ -100,10 +100,16 @@ void GameObject::SetActive(bool active)
 			isPreActive = true;
 		}
 		isActivity = true;
+		for (GameObject* child : childrenList) {
+			child->SetActive(true);
+		}
 	}
 	else {
 		isActivity = false;
 		isPreActive = false;
+		for (GameObject* child : childrenList) {
+			child->SetActive(false);
+		}
 	}
 }
 
@@ -129,12 +135,12 @@ void GameObject::OnEnable()
 
 void GameObject::Update()
 {
-	
+
 }
 
 void GameObject::PreRender()
 {
-	
+
 }
 
 void GameObject::PreEnable()

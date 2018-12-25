@@ -48,29 +48,29 @@ public:
 	void SetScale(glm::vec3 _scale);
 
 	//Get transform vector in local space 
-	glm::vec3 GetLoaclPositionVec();
-	glm::vec3 GetLocalScaleVec();
+	glm::vec3 GetLoaclPositionVec() const;
+	glm::vec3 GetLocalScaleVec() const;
 	//Get transform vector in world space
-	glm::vec3 GetPositionVec();
-	glm::vec3 GetScaleVec(); 
+	glm::vec3 GetPositionVec() const;
+	glm::vec3 GetScaleVec() const; 
 
 	//Get rotation mat in local space
-	glm::mat4 GetLocalRotationMat();
-	glm::mat4 GetLocalRotationInverse();
+	glm::mat4 GetLocalRotationMat() const;
+	glm::mat4 GetLocalRotationInverse() const;
 
 	//Get transform matrix in world space
-	glm::mat4 GetTranslateMat();
-	glm::mat4 GetRotationMat();
-	glm::mat4 GetScaleMat();
+	glm::mat4 GetTranslateMat() const;
+	glm::mat4 GetRotationMat() const;
+	glm::mat4 GetScaleMat() const;
 	//Get transform inverse matrix in world space
-	glm::mat4 GetTranslateInverse();
-	glm::mat4 GetRotationInverse();
-	glm::mat4 GetScaleInverse();
+	glm::mat4 GetTranslateInverse() const;
+	glm::mat4 GetRotationInverse() const;
+	glm::mat4 GetScaleInverse() const;
 
 	//Get local axis in world space
-	glm::vec3 GetX();
-	glm::vec3 GetY();
-	glm::vec3 GetZ();
+	glm::vec3 GetX() const;
+	glm::vec3 GetY() const;
+	glm::vec3 GetZ() const;
 
 protected:
 	glm::vec3 position;

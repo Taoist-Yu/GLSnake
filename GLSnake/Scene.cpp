@@ -28,6 +28,7 @@ void Scene::FrameCycle()
 	Enable();
 	Update();
 	Renrer();
+	Postcycle();
 }
 
 void Scene::ApplicateLight(Shader &shader)
@@ -87,19 +88,24 @@ void Scene::Update()
 {
 //	lightDirection = glm::rotate(glm::mat4(1), Time.GetDeltaTime(), glm::vec3(1, 0, 0)) * glm::vec4(GetLightDirection(),1.0f);
 	for (GameObject* object : ObjectList) {
-		object->Update();
+		if(object->GetActive())
+			object->Update();
 	}
 }
 
 void Scene::Renrer()
 {
 	for (GameObject* object : ObjectList) {
-		if (object->isRendereringEnable) {
+		if (object->isRendereringEnable && object->GetActive()) {
 			object->PreRender();
 			object->Render();
 			object->PostRender();
 		}
 	}
+}
+
+void Scene::Postcycle()
+{
 }
 
 void Scene::RemoveObject(GameObject * gameObject)

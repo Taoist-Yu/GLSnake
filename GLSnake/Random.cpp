@@ -1,0 +1,25 @@
+#include "Random.h"
+#include<stdlib.h>
+#include<time.h>
+
+bool Random::isinited = false;
+
+int Random::Next()
+{
+	return rand();
+}
+
+float Random::Range(float l, float r)
+{
+	if (l > r) {
+		return 0;
+	}
+	float ratio = (float)rand() / (float)RAND_MAX;
+	float result = l + ratio * (r - l);
+	return result;
+}
+
+void Random::InitSeed()
+{
+	srand((unsigned)time(NULL));
+}

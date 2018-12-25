@@ -13,6 +13,8 @@
 #include "Snake.h"
 #include "Skybox.h"
 
+#include "Level1.h"
+
 MainWindow* MainWindow::windowInstance;
 
 void MainWindow::CreateInstance()
@@ -59,8 +61,8 @@ void MainWindow::cursor_position_callback(GLFWwindow * window, double xpos, doub
 	lastX = xpos;
 	lastY = ypos;
 
-	if (xoffset > 50)xoffset = 0;
-	if (yoffset > 50)yoffset = 0;
+	if (xoffset > 30)xoffset = 0;
+	if (yoffset > 30)yoffset = 0;
 
 	Input::MouseMove = glm::vec2(xoffset, yoffset);
 }
@@ -84,14 +86,14 @@ void MainWindow::MainLoop()
 {
 	glEnable(GL_DEPTH_TEST);
 	
-	Scene level1;
+	Level1 level1;
 	level1.Activate();
 	//Level1
-	Confine confine(&level1);
+/*	Confine confine(&level1);
 	Snake snake(&level1);
 	confine.SetColor(glm::vec4(0, 0.5f, 0.5f, 1));
 	level1.AttachSkybox(new Skybox("Skybox/Level1"));
-	level1.timeScale = 1;
+	level1.timeScale = 1;*/
 
 	while (!glfwWindowShouldClose(window))
 	{

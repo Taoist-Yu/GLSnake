@@ -69,12 +69,22 @@ void Snake::ActivateCamera()
 	camera->Activate();
 }
 
+const SnakeNode * Snake::GetHead()
+{
+	return head;
+}
+
+void Snake::OnEatFood()
+{
+	this->Incress();
+}
+
 void Snake::InitSnake()
 {
 	tail = new SnakeNode(scene, this);
 	ChangeHead(tail);
 	length = 1;
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 5; i++) {
 		this->Incress();
 	}
 }
@@ -113,6 +123,9 @@ void Snake::Update()
 		}
 		if (Input::GetKey(GLFW_KEY_D)) {
 			head->transform.Rotate(sensitivity * Time.GetDeltaTime(), glm::vec3(0, -1, 0));
+		}
+		if (Input::GetKeyDown(GLFW_KEY_J)) {
+			Incress();
 		}
 
 		head->transform.Rotate(Input::GetMouseMove().y * sensitivity * Time.GetDeltaTime(), glm::vec3(1, 0, 0));
