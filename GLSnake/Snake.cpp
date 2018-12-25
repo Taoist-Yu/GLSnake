@@ -114,10 +114,7 @@ void Snake::Update()
 		if (Input::GetKeyDown(GLFW_KEY_K)) {
 			this->Decress();
 		}
-		if (Input::GetKeyDown(GLFW_KEY_SPACE)) {
-			directionEuler = glm::vec3(15 , -90, 0);
-		}
-		//directionEuler.y -= Input::GetMouseMove().x * sensitivity * Time.GetDeltaTime();
+		directionEuler.x += Input::GetMouseMove().y * sensitivity * Time.GetDeltaTime();
 	}
 
 	//Traverse all snake node and change position
@@ -130,7 +127,7 @@ void Snake::Update()
 	}
 	//Move the head
 	head->transform.SetRotation(directionEuler);
-//	head->transform.Translate(glm::vec3(0, 0, -1) * speed * Time.GetDeltaTime());
+	head->transform.Translate(glm::vec3(0, 0, -1) * speed * Time.GetDeltaTime());
 
 	//Traverse all snake node and normalize the spacing
 	p = head;

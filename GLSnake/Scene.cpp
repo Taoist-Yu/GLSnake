@@ -24,6 +24,7 @@ void Scene::FrameCycle()
 	float newAspectRatio = (float)MainWindow::Instance()->GetWidth() / (float)MainWindow::Instance()->GetHeight();
 	if(newAspectRatio > 0)
 		camera->aspectRatio = newAspectRatio;
+	camera->DrawSky();
 	Enable();
 	Update();
 	Renrer();
@@ -65,6 +66,11 @@ void Scene::SetStatus(GameStatus status)
 Scene::GameStatus Scene::GetStatus()
 {
 	return this->status;
+}
+
+void Scene::AttachSkybox(Skybox * skybox)
+{
+	camera->AttachSkybox(skybox);
 }
 
 void Scene::Enable()

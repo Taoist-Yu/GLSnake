@@ -5,6 +5,7 @@
 #include"Shader.h"
 #include "GameObject.h"
 #include "Camera.h"
+#include "Skybox.h"
 
 #include<List>
 
@@ -37,6 +38,9 @@ public:
 	//Status
 	void SetStatus(GameStatus status);
 	GameStatus GetStatus();
+
+	//
+	void AttachSkybox(Skybox *skybox);
 
 private:
 	//Frame cycle

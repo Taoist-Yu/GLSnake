@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Transform.h"
 #include "Shader.h"
+#include "Skybox.h"
 
 class Camera : public GameObject
 {
@@ -22,10 +23,13 @@ public:
 
 	void Update();
 	void Activate();
+	void AttachSkybox(Skybox *skybox);
+	void DrawSky();
 
 private:
 	glm::mat4 view;
 	glm::mat4 projection;
+	Skybox *skybox;
 
 	void CameraRender(Shader &shader);
 

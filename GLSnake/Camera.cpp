@@ -13,6 +13,7 @@ Camera::Camera(Scene *scene, GameObject *parent)
 
 Camera::~Camera()
 {
+	delete skybox;
 }
 
 void Camera::Update()
@@ -27,6 +28,19 @@ void Camera::Update()
 void Camera::Activate()
 {
 	scene->camera = this;
+}
+
+void Camera::AttachSkybox(Skybox * skybox)
+{
+	this->skybox = skybox;
+}
+
+void Camera::DrawSky()
+{
+	if (skybox != NULL) {
+		//Render skybox
+		skybox->Draw(view, projection);
+	}
 }
 
 void Camera::CameraRender(Shader &shader)

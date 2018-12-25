@@ -21,6 +21,7 @@ glm::vec4 Confine::GetColor()
 void Confine::SetColor(glm::vec4 color)
 {
 	this->color = color;
+	shader->SetVec4("color",color);
 }
 
 void Confine::PreRender()

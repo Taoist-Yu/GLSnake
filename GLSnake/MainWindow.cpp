@@ -11,6 +11,7 @@
 #include "Ball.h"
 #include "Confine.h"
 #include "Snake.h"
+#include "Skybox.h"
 
 MainWindow* MainWindow::windowInstance;
 
@@ -86,8 +87,11 @@ void MainWindow::MainLoop()
 	Scene level1;
 	level1.Activate();
 	//Level1
-	Confine confine(&level1);
+//	Confine confine(&level1);
 	Snake snake(&level1);
+//	confine.SetColor(glm::vec4(0, 1, 1, 1));
+	level1.AttachSkybox(new Skybox("Skybox/Level1"));
+	level1.timeScale = 1;
 
 	while (!glfwWindowShouldClose(window))
 	{
