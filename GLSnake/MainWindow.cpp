@@ -12,8 +12,12 @@
 #include "Confine.h"
 #include "Snake.h"
 #include "Skybox.h"
+#include "Sprite.h"
+#include "Text.h"
 
 #include "Level1.h"
+#include "Level2.h"
+#include "Level3.h"
 
 MainWindow* MainWindow::windowInstance;
 
@@ -85,10 +89,18 @@ MainWindow::~MainWindow()
 void MainWindow::MainLoop()
 {
 	glEnable(GL_DEPTH_TEST);
-	
-	Level1 level1;
-	level1.difficulty = Level::normal;
-	level1.GameStart();
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+//	Level3 level1;
+//	level1.difficulty = Level::normal;
+//	level1.timeScale = 10;
+	Sprite sprite;
+	sprite.scale = glm::vec2(0.2, 0.2);
+	sprite.position = glm::vec2(0.5, 0.2);
+	sprite.LoadTexture("container.jpg");
+	Text text;
+	text.SetText("8");
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -101,7 +113,9 @@ void MainWindow::MainLoop()
 		glClearColor(0.05f, 0.5f, 0.05f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		this->scene->FrameCycle();
+//		this->scene->FrameCycle();
+ 		sprite.Draw();
+		text.Draw();
 
 		//Escape Input
 		if (Input::GetKeyDown(GLFW_KEY_ESCAPE)) {

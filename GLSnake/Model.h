@@ -28,9 +28,11 @@ public:
 	Model(const char *path);
 	~Model();
 	void Draw(Shader& shader);
-private:
+
 	/*  模型数据  */
 	std::vector<Mesh*> meshes;
+private:
+	
 	std::string directory;
 	/*  函数   */
 	void loadModel(std::string path);

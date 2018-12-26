@@ -29,10 +29,11 @@ public:
 	void GameStart();
 	void GameOver();
 
-	int GetCurrentRadius();
+	float GetCurrentRadius();
 
 protected:
 	void Postcycle();
+	virtual void PostcycleEX();						//特定关卡子类指向额外操作
 
 	void GeneratePoison();
 
@@ -40,6 +41,7 @@ protected:
 	void SnakeBodyDetection(GameObject* collider);
 	void PoisonDetection(GameObject* collider);
 	void BombDetection(GameObject* collider);
+	void BarrierDetection(GameObject* collider);
 	void ConfineDetection();
 
 protected:

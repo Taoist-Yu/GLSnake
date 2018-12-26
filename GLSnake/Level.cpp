@@ -41,6 +41,8 @@ Level::Level()
 		bombs[i]->SetActive(false);
 	}
 
+	GameStart();
+
 }
 
 Level::~Level()
@@ -88,7 +90,7 @@ void Level::GameOver()
 	snake->SetActive(false);
 }
 
-int Level::GetCurrentRadius()
+float Level::GetCurrentRadius()
 {
 	return confine->GetCurrentRaduis();
 }
@@ -125,11 +127,20 @@ void Level::Postcycle()
 			case GameObject::Tag::bomb:
 				BombDetection(object);
 				break;
+			case GameObject::Tag::barrier:
+				BarrierDetection(object);
+				break;
 			default:
 				break;
 			}
 		}
 	}
+
+	PostcycleEX();
+}
+
+void Level::PostcycleEX()
+{
 }
 
 void Level::GeneratePoison()
@@ -174,6 +185,16 @@ void Level::BombDetection(GameObject * collider)
 			((Bomb*)collider)->Respawn();
 			snake->Decress();
 		}
+	}
+}
+
+void Level::BarrierDetection(GameObject * collider)
+{
+	float distance = glm::distance(collider->transform.GetPositionVec(), head->transform.GetPositionVec());
+	glm::vec3 s = collider->transform.GetScaleVec();
+	float collideRadiu = (s.x + s.y + s.z) / 3;				//简化，假设所有碰撞体都接近球形且再模型空间中为单位尺寸
+	if (distance < collideRadiu + 1) {
+		snake->Die();
 	}
 }
 

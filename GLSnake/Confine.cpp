@@ -1,6 +1,6 @@
 #include "Confine.h"
 
-const int Confine::radius = 100;
+const float Confine::radius = 100;
 
 Confine::Confine(Scene *scene, GameObject *parent)
 	: GameObject(scene, "model/Confine/Confine.obj", "confine.vert", "confine.frag", parent)
@@ -24,12 +24,12 @@ void Confine::SetColor(glm::vec4 color)
 	shader->SetVec4("color",color);
 }
 
-void Confine::SetCurrentRadius(int currentRadius)
+void Confine::SetCurrentRadius(float currentRadius)
 {
 	this->currentRadius = currentRadius;
 }
 
-int Confine::GetCurrentRaduis()
+float Confine::GetCurrentRaduis()
 {
 	return currentRadius;
 }

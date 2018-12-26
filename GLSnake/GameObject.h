@@ -27,6 +27,7 @@ public:
 		food,
 		poison,
 		bomb,
+		barrier
 	};
 	Tag tag = defaultObject;
 

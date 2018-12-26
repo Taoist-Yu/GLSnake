@@ -6,11 +6,17 @@ bool Random::isinited = false;
 
 int Random::Next()
 {
+	if (!isinited) {
+		InitSeed();
+	}
 	return rand();
 }
 
 float Random::Range(float l, float r)
 {
+	if (!isinited) {
+		InitSeed();
+	}
 	if (l > r) {
 		return 0;
 	}
@@ -22,4 +28,5 @@ float Random::Range(float l, float r)
 void Random::InitSeed()
 {
 	srand((unsigned)time(NULL));
+	isinited = true;
 }

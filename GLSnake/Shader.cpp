@@ -49,6 +49,13 @@ void Shader::SetFloat(const std::string name, float value) const
 	this->Disable();
 }
 
+void Shader::SetVec2(const std::string name, glm::vec2 value) const
+{
+	this->Enable();
+	glUniform2f(glGetUniformLocation(id, name.c_str()), value.x, value.y);
+	this->Disable();
+}
+
 void Shader::SetVec3(const std::string name, glm::vec3 value) const
 {
 	this->Enable();
