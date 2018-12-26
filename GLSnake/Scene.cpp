@@ -6,7 +6,7 @@ Scene::Scene()
 {
 	lightDirection = glm::vec3(0, -1, 0);
 	directedLightColor = glm::vec3(1, 1, 1);
-	ambientLightColor = glm::vec3(0.2, 0.2, 0.2);
+	ambientLightColor = glm::vec3(0.4, 0.4, 0.4);
 }
 
 Scene::~Scene()
@@ -21,10 +21,18 @@ void Scene::Activate()
 
 void Scene::FrameCycle()
 {
+	//Config camera
 	float newAspectRatio = (float)MainWindow::Instance()->GetWidth() / (float)MainWindow::Instance()->GetHeight();
 	if(newAspectRatio > 0)
 		camera->aspectRatio = newAspectRatio;
 	camera->DrawSky();
+	//Destroy Object
+	while (!DestoryList.empty()) {
+		(*DestoryList.begin())->DestroyImmediately();
+		std::list<GameObject*>::iterator it =  DestoryList.begin();
+		DestoryList.erase(it);
+	}
+
 	Enable();
 	Update();
 	Renrer();

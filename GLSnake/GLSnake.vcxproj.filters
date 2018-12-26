@@ -31,6 +31,9 @@
     <Filter Include="Level">
       <UniqueIdentifier>{8f75e0c4-9fbf-4110-8a98-f93db7db2dac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\Shader\Poison">
+      <UniqueIdentifier>{58fec09e-7fe0-4ca1-aa9b-7cec4e7cdeef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\glad.cpp">
@@ -102,6 +105,12 @@
     <ClCompile Include="Level1.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="Poison.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -164,6 +173,12 @@
     <ClInclude Include="Level1.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="Poison.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.frag">
@@ -192,6 +207,12 @@
     </None>
     <None Include="skybox.frag">
       <Filter>资源文件\Shader\Skybox</Filter>
+    </None>
+    <None Include="poison.vert">
+      <Filter>资源文件\Shader\Poison</Filter>
+    </None>
+    <None Include="poison.frag">
+      <Filter>资源文件\Shader\Poison</Filter>
     </None>
   </ItemGroup>
 </Project>

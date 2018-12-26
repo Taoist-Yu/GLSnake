@@ -87,13 +87,8 @@ void MainWindow::MainLoop()
 	glEnable(GL_DEPTH_TEST);
 	
 	Level1 level1;
-	level1.Activate();
-	//Level1
-/*	Confine confine(&level1);
-	Snake snake(&level1);
-	confine.SetColor(glm::vec4(0, 0.5f, 0.5f, 1));
-	level1.AttachSkybox(new Skybox("Skybox/Level1"));
-	level1.timeScale = 1;*/
+	level1.difficulty = Level::normal;
+	level1.GameStart();
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -113,12 +108,10 @@ void MainWindow::MainLoop()
 			if (scene->GetStatus() == Scene::normal) {
 				scene->SetStatus(Scene::pause);
 				Time.SetTimeScale(0);
-				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			}
 			else if (scene->GetStatus() == Scene::pause) {
 				scene->SetStatus(Scene::normal);
 				Time.SetTimeScale(scene->timeScale);
-				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 			}
 		}
 
@@ -157,5 +150,4 @@ void MainWindow::WindowInit(GLuint width, GLuint height, std::string title)
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetCursorPosCallback(window, cursor_position_callback);
 
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }

@@ -4,10 +4,15 @@
 #include<iostream>
 #include<string>
 
-namespace Debug
+class Debug
 {
-	void Log(std::string str);
-	void Warning(std::string str);
-	void Error(std::string str);
-}
+	static std::ofstream log;
+	static std::ofstream warning;
+	static std::ofstream error;
+
+public:
+	static void Log(std::string str);
+	static void Warning(std::string str);
+	static void Error(std::string str);
+};
 

@@ -53,8 +53,7 @@ public:
 
 protected:
 	GameObject(Scene* scene, GameObject *parent = NULL);
-
-	
+	void DestroyImmediately();
 
 	/*Lifecycle*/
 	void PreEnable();

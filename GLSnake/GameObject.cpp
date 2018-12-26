@@ -12,11 +12,7 @@ void GameObject::Destroy(GameObject * gameObject)
 	while (!gameObject->childrenList.empty()) {
 		Destroy(*gameObject->childrenList.begin());
 	}
-	gameObject->SetParent(NULL);
-	gameObject->scene->RemoveObject(gameObject);
-	//Delete the dynamic memory applied by the new operator
-	delete gameObject->model;
-	delete gameObject->shader;
+	gameObject->scene->DestoryList.push_back(gameObject);
 }
 
 GameObject::GameObject(Scene * scene, GameObject * parent)
@@ -25,6 +21,15 @@ GameObject::GameObject(Scene * scene, GameObject * parent)
 	this->scene = scene;
 	SetParent(parent);
 	scene->ObjectList.push_back(this);
+}
+
+void GameObject::DestroyImmediately()
+{
+	this->SetParent(NULL);
+	this->scene->RemoveObject(this);
+	//Delete the dynamic memory applied by the new operator
+	delete this->model;
+	delete this->shader;
 }
 
 GameObject::GameObject(Scene* scene, const char *modelPath, GameObject *parent)

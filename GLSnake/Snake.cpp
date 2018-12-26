@@ -13,7 +13,6 @@ Snake::Snake(Scene *scene, GameObject *parent)
 	this->ActivateCamera();
 }
 
-
 Snake::~Snake()
 {
 }
@@ -54,14 +53,26 @@ void Snake::Decress()
 	if (length <= 1) {
 		//Unfinished!!!
 		//Destroy Snake
+		Die();
+		head->DisableRendring();
 	}
 	else {
 		SnakeNode* oldTail = tail;
 		tail = tail->last;
 		tail->next = NULL;
-		delete oldTail;
+		Destroy(oldTail);
 	}
 	length--;
+}
+
+void Snake::Die()
+{
+	isAlive = false;
+}
+
+bool Snake::GetAlive()
+{
+	return isAlive;
 }
 
 void Snake::ActivateCamera()
@@ -128,8 +139,8 @@ void Snake::Update()
 			Incress();
 		}
 
-		head->transform.Rotate(Input::GetMouseMove().y * sensitivity * Time.GetDeltaTime(), glm::vec3(1, 0, 0));
-		head->transform.Rotate(Input::GetMouseMove().x * sensitivity * Time.GetDeltaTime(), -glm::vec3(0, 1, 0));
+		//head->transform.Rotate(Input::GetMouseMove().y * sensitivity * Time.GetDeltaTime(), glm::vec3(1, 0, 0));
+		//head->transform.Rotate(Input::GetMouseMove().x * sensitivity * Time.GetDeltaTime(), -glm::vec3(0, 1, 0));
 	}
 
 	//Traverse all snake node and change position

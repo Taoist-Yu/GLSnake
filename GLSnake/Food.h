@@ -9,6 +9,7 @@ public:
 	virtual ~Food();
 
 	void Respawn();
+	void Update();
 
 private:
 	void OnEnable();

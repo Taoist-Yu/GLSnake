@@ -2,6 +2,7 @@
 
 #include "Random.h"
 #include "Confine.h"
+#include "Level.h"
 
 Food::Food(Scene *scene, GameObject *parent)
 	: Ball(scene, parent)
@@ -20,13 +21,20 @@ void Food::Respawn()
 	this->SetActive(true);
 }
 
+void Food::Update()
+{
+	glm::vec3 v = transform.GetPositionVec();
+	float dis = glm::distance(v, glm::vec3(0, 0, 0));
+
+	if (dis > ((Level*)scene)->GetCurrentRadius()) {
+		this->transform.SetPosition(this->transform.GetPositionVec() / 2.0f);
+	}
+}
+
 void Food::OnEnable()
 {
 	tag = Tag::food;
 	SetColor(glm::vec4(1, 1, 0, 1));
 
-	glm::vec3 Pos(Random::Range(-1, 1), Random::Range(-1, 1), Random::Range(-1, 1));
-	Pos = normalize(Pos);
-	Pos = Random::Range(0, Confine::radius - 2) * Pos;		//食物不在边界生成
-	this->transform.SetPosition(Pos);
+	this->transform.SetPosition(Level::ObjectRespawnPosition(scene));
 }

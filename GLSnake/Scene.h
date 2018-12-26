@@ -11,7 +11,9 @@
 
 class Scene
 {
+	friend class Level;
 	friend void GameObject::Destroy(GameObject *gameObject);
+	friend void GameObject::DestroyImmediately();
 	friend void GameObject::Render();
 	friend GameObject::GameObject(Scene* scene, GameObject *parent);
 	friend void Camera::Activate();
@@ -59,6 +61,7 @@ protected:
 	GameStatus status = normal;
 
 	std::list<GameObject*> ObjectList;			//The list of gameObject
+	std::list<GameObject*> DestoryList;			//The list of gameObject waiting to be destoried
 	Camera *camera;								//The active camera	
 
 	glm::vec3 lightDirection;					//The direction of directed light
