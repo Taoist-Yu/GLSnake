@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "Camera.h"
 #include "Skybox.h"
+#include "Canvas.h"
 
 #include<List>
 
@@ -63,6 +64,7 @@ protected:
 	std::list<GameObject*> ObjectList;			//The list of gameObject
 	std::list<GameObject*> DestoryList;			//The list of gameObject waiting to be destoried
 	Camera *camera;								//The active camera	
+	Canvas *canvas;
 
 	glm::vec3 lightDirection;					//The direction of directed light
 	glm::vec3 directedLightColor;				//The color of directed light

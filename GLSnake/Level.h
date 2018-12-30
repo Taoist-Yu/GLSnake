@@ -10,6 +10,7 @@
 class Level :
 	public Scene
 {
+	friend class GameCanvas;
 public:
 	//随机生成一个对象重生的位置
 	static glm::vec3 ObjectRespawnPosition(Scene* scene);
@@ -36,6 +37,7 @@ protected:
 	virtual void PostcycleEX();						//特定关卡子类指向额外操作
 
 	void GeneratePoison();
+	void UpdateProcess();
 
 	void FoodDetection(GameObject* collider);
 	void SnakeBodyDetection(GameObject* collider);
@@ -57,6 +59,8 @@ protected:
 	Bomb* bombs[50];
 
 	const SnakeNode* head;
-	
+
+	bool isOver = false;
+	bool isComplete = false;
 };
 

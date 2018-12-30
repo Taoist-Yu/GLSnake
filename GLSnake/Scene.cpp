@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "Time.h"
 #include "MainWindow.h"
+#include "Canvas.h"
 
 Scene::Scene()
 {
@@ -11,6 +12,9 @@ Scene::Scene()
 
 Scene::~Scene()
 {
+	Time.SetTimeScale(1);
+	delete camera;
+	delete canvas;
 }
 
 void Scene::Activate()
@@ -37,6 +41,13 @@ void Scene::FrameCycle()
 	Update();
 	Renrer();
 	Postcycle();
+
+	//UI
+	if (canvas != NULL) {
+		if (canvas->GetActive()) {
+			canvas->Update();
+		}
+	}
 }
 
 void Scene::ApplicateLight(Shader &shader)

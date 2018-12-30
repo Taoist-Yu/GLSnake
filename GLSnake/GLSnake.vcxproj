@@ -163,12 +163,20 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Confine.cpp" />
+    <ClCompile Include="ContinueButton.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="DifficultyButton.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="Food.cpp" />
+    <ClCompile Include="GameCanvas.cpp" />
+    <ClCompile Include="GameData.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LeftArrorButton.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level2.cpp" />
@@ -183,6 +191,8 @@
     </ClCompile>
     <ClCompile Include="Poison.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="ReturnButton.cpp" />
+    <ClCompile Include="RightArrowButton.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp">
       <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</BufferSecurityCheck>
@@ -194,6 +204,9 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="src\glad.cpp" />
     <ClCompile Include="src\stb_image.cpp" />
+    <ClCompile Include="StartButton.cpp" />
+    <ClCompile Include="StartCanvas.cpp" />
+    <ClCompile Include="StartScene.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -201,28 +214,42 @@
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Canvas.h" />
     <ClInclude Include="Confine.h" />
+    <ClInclude Include="ContinueButton.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="DifficultyButton.h" />
+    <ClInclude Include="ExitButton.h" />
     <ClInclude Include="Food.h" />
+    <ClInclude Include="GameCanvas.h" />
+    <ClInclude Include="GameData.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="LeftArrorButton.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Level2.h" />
     <ClInclude Include="Level3.h" />
+    <ClInclude Include="Levels.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Meteorolite.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Poison.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="ReturnButton.h" />
+    <ClInclude Include="RightArrowButton.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="SnakeNode.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="StartButton.h" />
+    <ClInclude Include="StartCanvas.h" />
+    <ClInclude Include="StartScene.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Transform.h" />

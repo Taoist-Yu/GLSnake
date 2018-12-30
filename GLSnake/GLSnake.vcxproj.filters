@@ -5,10 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="源文件">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -42,6 +38,19 @@
     </Filter>
     <Filter Include="资源文件\Shader\Text">
       <UniqueIdentifier>{b29e17b2-0030-4a2e-ac75-f7b32c7dbdec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{198c1a73-a84d-49af-801d-41fae0af9402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\StartScene">
+      <UniqueIdentifier>{dba8ac05-0c6f-4251-a612-a568b47efed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Game">
+      <UniqueIdentifier>{84b79819-e05b-4bb7-a316-0f6b0fc7ecf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +144,45 @@
     <ClCompile Include="Text.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScene.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="StartCanvas.cpp">
+      <Filter>UI\StartScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftArrorButton.cpp">
+      <Filter>UI\StartScene</Filter>
+    </ClCompile>
+    <ClCompile Include="RightArrowButton.cpp">
+      <Filter>UI\StartScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StartButton.cpp">
+      <Filter>UI\StartScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ExitButton.cpp">
+      <Filter>UI\StartScene</Filter>
+    </ClCompile>
+    <ClCompile Include="DifficultyButton.cpp">
+      <Filter>UI\StartScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCanvas.cpp">
+      <Filter>UI\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnButton.cpp">
+      <Filter>UI\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinueButton.cpp">
+      <Filter>UI\StartScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -217,6 +265,48 @@
     </ClInclude>
     <ClInclude Include="Text.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScene.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="StartCanvas.h">
+      <Filter>UI\StartScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftArrorButton.h">
+      <Filter>UI\StartScene</Filter>
+    </ClInclude>
+    <ClInclude Include="RightArrowButton.h">
+      <Filter>UI\StartScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StartButton.h">
+      <Filter>UI\StartScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ExitButton.h">
+      <Filter>UI\StartScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DifficultyButton.h">
+      <Filter>UI\StartScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCanvas.h">
+      <Filter>UI\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnButton.h">
+      <Filter>UI\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ContinueButton.h">
+      <Filter>UI\StartScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

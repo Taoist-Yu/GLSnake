@@ -3,7 +3,11 @@
 std::set<int> Input::KeyDownSet;
 std::set<int> Input::KeySet;
 std::set<int> Input::KeyUpSet;
+std::set<int> Input::mouseBottonDown;
+std::set<int> Input::mouseBottonUp;
 glm::vec2 Input::MouseMove;
+glm::vec2 Input::MousePos;
+
 
 bool Input::GetKeyDown(int keyCode)
 {
@@ -29,14 +33,37 @@ bool Input::GetKeyUp(int keyCode)
 		return false;
 }
 
+bool Input::GetMouseBottonDown(int botton)
+{
+	if (mouseBottonDown.find(botton) != mouseBottonDown.end())
+		return true;
+	else
+		return false;
+}
+
+bool Input::GetMouseBottonUp(int botton)
+{
+	if (mouseBottonUp.find(botton) != mouseBottonUp.end())
+		return true;
+	else
+		return false;
+}
+
 glm::vec2 Input::GetMouseMove()
 {
 	return MouseMove;
+}
+
+glm::vec2 Input::GetMousePos()
+{
+	return MousePos;
 }
 
 void Input::InputUpdate()
 {
 	KeyDownSet.clear();
 	KeyUpSet.clear();
+	mouseBottonDown.clear();
+	mouseBottonUp.clear();
 	MouseMove = glm::vec2(0, 0);
 }

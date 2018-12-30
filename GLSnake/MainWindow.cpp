@@ -14,10 +14,11 @@
 #include "Skybox.h"
 #include "Sprite.h"
 #include "Text.h"
-
-#include "Level1.h"
-#include "Level2.h"
-#include "Level3.h"
+#include "stb_image.h"
+#include "Levels.h"
+#include "StartScene.h"
+#include "Button.h"
+#include "GameData.h"
 
 MainWindow* MainWindow::windowInstance;
 
@@ -69,6 +70,17 @@ void MainWindow::cursor_position_callback(GLFWwindow * window, double xpos, doub
 	if (yoffset > 30)yoffset = 0;
 
 	Input::MouseMove = glm::vec2(xoffset, yoffset);
+	Input::MousePos = glm::vec2(xpos, ypos);
+}
+
+void MainWindow::mouse_button_callback(GLFWwindow * window, int button, int action, int mods)
+{
+	if (action == GLFW_PRESS) {
+		Input::mouseBottonDown.insert(button);
+	}
+	if (action == GLFW_RELEASE) {
+		Input::mouseBottonUp.insert(button);
+	}
 }
 
 MainWindow::MainWindow()
@@ -92,20 +104,18 @@ void MainWindow::MainLoop()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-//	Level3 level1;
-//	level1.difficulty = Level::normal;
-//	level1.timeScale = 10;
-	Sprite sprite;
-	sprite.scale = glm::vec2(0.2, 0.2);
-	sprite.position = glm::vec2(0.5, 0.2);
-	sprite.LoadTexture("container.jpg");
-	Text text;
-	text.SetText("8");
+	StartScene *startScene = new StartScene();
+	startScene->Activate();
 
 	while (!glfwWindowShouldClose(window))
 	{
 		//Timer
 		Time.TimerUpdate();
+
+		//Check Scene change
+		if (newScene != NULL) {
+			loadScene();
+		}
 
 		//Render
 		glfwGetWindowSize(this->window, &this->width, &this->height);
@@ -113,26 +123,29 @@ void MainWindow::MainLoop()
 		glClearColor(0.05f, 0.5f, 0.05f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-//		this->scene->FrameCycle();
- 		sprite.Draw();
-		text.Draw();
+		this->scene->FrameCycle();
+		//text.Draw();
 
 		//Escape Input
 		if (Input::GetKeyDown(GLFW_KEY_ESCAPE)) {
-			if (scene->GetStatus() == Scene::normal) {
-				scene->SetStatus(Scene::pause);
+			if (this->scene->GetStatus() == Scene::normal) {
+				this->scene->SetStatus(Scene::pause);
 				Time.SetTimeScale(0);
 			}
-			else if (scene->GetStatus() == Scene::pause) {
-				scene->SetStatus(Scene::normal);
-				Time.SetTimeScale(scene->timeScale);
+			else if (this->scene->GetStatus() == Scene::pause) {
+				this->scene->SetStatus(Scene::normal);
+				Time.SetTimeScale(this->scene->timeScale);
 			}
 		}
+
+/*奇怪的事情，不输出帧率的话会卡*/
+		std::cout << (int)(1 / Time.GetUnscaledDeltaTime()) << std::endl;
 
 		//InputUpdate
 		Input::InputUpdate();
 		glfwPollEvents();
 	}
+	GameData::Save();
 }
 
 int MainWindow::GetWidth()
@@ -143,6 +156,16 @@ int MainWindow::GetWidth()
 int MainWindow::GetHeight()
 {
 	return height;
+}
+
+void MainWindow::QuitWindow()
+{
+	glfwSetWindowShouldClose(window, GLFW_TRUE);
+}
+
+void MainWindow::loadScene(Scene * scene)
+{
+	this->newScene = scene;
 }
 
 void MainWindow::WindowInit(GLuint width, GLuint height, std::string title)
@@ -163,5 +186,20 @@ void MainWindow::WindowInit(GLuint width, GLuint height, std::string title)
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetCursorPosCallback(window, cursor_position_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
 
+	//Game Data Load
+	GameData::Load();
+
+}
+
+void MainWindow::loadScene()
+{
+	if (this->scene != NULL) {
+		delete this->scene;
+		this->scene = NULL;
+	}
+	this->scene = newScene;
+	Time.SetTimeScale(this->scene->timeScale);
+	newScene = NULL;
 }

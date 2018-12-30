@@ -32,6 +32,9 @@ void Camera::Activate()
 
 void Camera::AttachSkybox(Skybox * skybox)
 {
+	if (this->skybox != NULL) {
+		delete this->skybox;
+	}
 	this->skybox = skybox;
 }
 

@@ -27,6 +27,7 @@ private:
 	//Input Event
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 public:
 	~MainWindow();
@@ -34,6 +35,9 @@ public:
 
 	int GetWidth();
 	int GetHeight();
+	void QuitWindow();
+
+	void loadScene(Scene * scene);
 	
 public:
 	Scene* scene;			//Current active scene
@@ -42,12 +46,15 @@ private:
 	MainWindow();
 	MainWindow(GLuint width, GLuint height, std::string title);
 	void WindowInit(GLuint width, GLuint height, std::string title);
+	void loadScene();
 
 private:
 	int width;
 	int height;
 	std::string title;
 	GLFWwindow* window;
+
+	Scene *newScene = NULL;
 
 };
 

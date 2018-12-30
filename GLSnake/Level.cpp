@@ -2,6 +2,8 @@
 #include "Random.h"
 #include "Time.h"
 
+#include "GameData.h"
+#include "GameCanvas.h"
 
 glm::vec3 Level::ObjectRespawnPosition(Scene* scene)
 {
@@ -41,6 +43,8 @@ Level::Level()
 		bombs[i]->SetActive(false);
 	}
 
+	canvas = new GameCanvas(this);
+
 	GameStart();
 
 }
@@ -51,17 +55,21 @@ Level::~Level()
 
 void Level::GameStart()
 {
+	difficulty = (Difficulty)GameData::difficulty;
 	switch (difficulty)
 	{
 	case Level::easy:
+		this->timeScale = 1;
 		poisonNum = 5;
 		bombNum = 3;
 		break;
 	case Level::normal:
+		this->timeScale = 3;
 		poisonNum = 20;
 		bombNum = 5;
 		break;
 	case Level::hard:
+		this->timeScale = 5;
 		poisonNum = 50;
 		bombNum = 10;
 		break;
@@ -81,13 +89,15 @@ void Level::GameStart()
 
 	//Timer
 	poisonTimeVal = 0;
-	
-	this->Activate();
+
+	//更新进度条
+	UpdateProcess();
 }
 
 void Level::GameOver()
 {
 	snake->SetActive(false);
+	isOver = true;
 }
 
 float Level::GetCurrentRadius()
@@ -97,6 +107,24 @@ float Level::GetCurrentRadius()
 
 void Level::Postcycle()
 {
+	UpdateProcess();
+	GameCanvas* canvas = (GameCanvas*)(this->canvas);
+	if (isOver == true) {
+		canvas->headline->SetActive(true);
+		canvas->returnButton->SetActive(true);
+		canvas->returnButton->position = glm::vec2(0, - 0.5);
+	}
+	else if(this->status == GameStatus::pause){
+		canvas->headline->SetActive(false);
+		canvas->returnButton->SetActive(true);
+		canvas->returnButton->position = glm::vec2(0, 0);
+	}
+	else {
+		canvas->headline->SetActive(false);
+		canvas->returnButton->SetActive(false);
+		canvas->returnButton->position = glm::vec2(0, 0);
+	}
+
 	if (snake->GetAlive() == false) {
 		GameOver();
 	}
@@ -148,6 +176,29 @@ void Level::GeneratePoison()
 	for (int i = 0; i < poisonNum; i++) {
 		poisons[i]->SetActive(true);
 	}
+}
+
+void Level::UpdateProcess()
+{
+	GameCanvas *canvas = (GameCanvas*)this->canvas;
+	float process = (float)snake->GetLength() / 20;
+	if (process > 1) {
+		process = 1;
+		if (isComplete == false) {
+			isComplete = true;
+			if (GameData::currentLevel == GameData::levelUpper) {
+				canvas->timeVal = 3;
+				if (GameData::levelUpper < 3) {
+					GameData::levelUpper++;
+					canvas->newLevel->SetActive(true);
+				}
+				else {
+					canvas->finish->SetActive(true);
+				}
+			}
+		}
+	}
+	canvas->processBar->scale = glm::vec2(process, 0.025f);
 }
 
 void Level::FoodDetection(GameObject * collider)

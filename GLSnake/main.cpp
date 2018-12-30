@@ -10,7 +10,7 @@
 int main()
 {
 	
-	MainWindow::CreateInstance();
+	MainWindow::CreateInstance(1024, 768, "Snake");
 	MainWindow::Instance()->MainLoop();
 	return 0;
 }
